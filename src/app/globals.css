@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 150 30% 98%;
+    --foreground: 160 25% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 160 25% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 160 25% 12%;
+
+    --primary: 152 56% 34%;
+    --primary-foreground: 150 40% 98%;
+
+    --secondary: 150 20% 94%;
+    --secondary-foreground: 160 25% 18%;
+
+    --muted: 150 16% 92%;
+    --muted-foreground: 155 10% 42%;
+
+    --accent: 145 40% 90%;
+    --accent-foreground: 160 30% 16%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 150 16% 88%;
+    --input: 150 16% 88%;
+    --ring: 152 56% 40%;
+
+    --radius: 0.85rem;
+
+    /* hero fairway gradient stops */
+    --fairway-from: 152 60% 88%;
+    --fairway-to: 150 30% 98%;
+  }
+
+  .dark {
+    --background: 165 30% 6%;
+    --foreground: 150 20% 94%;
+
+    --card: 165 24% 9%;
+    --card-foreground: 150 20% 94%;
+
+    --popover: 165 24% 9%;
+    --popover-foreground: 150 20% 94%;
+
+    --primary: 150 60% 45%;
+    --primary-foreground: 165 40% 8%;
+
+    --secondary: 165 18% 16%;
+    --secondary-foreground: 150 20% 92%;
+
+    --muted: 165 16% 16%;
+    --muted-foreground: 150 10% 62%;
+
+    --accent: 160 24% 18%;
+    --accent-foreground: 150 20% 92%;
+
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 165 16% 18%;
+    --input: 165 16% 20%;
+    --ring: 150 60% 50%;
+
+    --fairway-from: 160 50% 14%;
+    --fairway-to: 165 30% 6%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  /* Respect reduced-motion preferences. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  /* Subtle dotted golf-green texture for the hero. */
+  .bg-green-texture {
+    background-image: radial-gradient(
+      hsl(var(--primary) / 0.08) 1px,
+      transparent 1px
+    );
+    background-size: 22px 22px;
+  }
+}
