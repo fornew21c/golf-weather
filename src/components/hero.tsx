@@ -4,7 +4,8 @@ import { SearchBar } from "@/components/search-bar";
 
 export function Hero() {
   return (
-    <section className="relative bg-fairway-gradient">
+    // z-20: 검색 드롭다운이 하이라이트 카드 위에 그려지도록 히어로를 한 레이어 올림
+    <section className="relative z-20 bg-fairway-gradient">
       {/* overflow-hidden은 배경 텍스처에만 적용 — 섹션에 두면 검색 드롭다운이 잘린다. */}
       <div className="absolute inset-0 overflow-hidden bg-green-texture opacity-60" aria-hidden />
       <div className="container relative flex flex-col items-center py-16 text-center sm:py-24">
