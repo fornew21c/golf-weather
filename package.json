@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "build:courses": "node scripts/build-courses.mjs"
   },
   "dependencies": {
     "@radix-ui/react-progress": "^1.1.0",

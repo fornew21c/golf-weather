@@ -4,8 +4,9 @@ import { SearchBar } from "@/components/search-bar";
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden bg-fairway-gradient">
-      <div className="absolute inset-0 bg-green-texture opacity-60" aria-hidden />
+    <section className="relative bg-fairway-gradient">
+      {/* overflow-hidden은 배경 텍스처에만 적용 — 섹션에 두면 검색 드롭다운이 잘린다. */}
+      <div className="absolute inset-0 overflow-hidden bg-green-texture opacity-60" aria-hidden />
       <div className="container relative flex flex-col items-center py-16 text-center sm:py-24">
         <Badge variant="glass" className="mb-5 animate-fade-up">
           <Sparkles className="size-3.5" />

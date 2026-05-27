@@ -1,17 +1,13 @@
 import type { GolfCourse } from "./types";
+// 전국 골프장 시드 데이터 (data.go.kr CSV → Kakao 좌표 변환).
+// `npm run build:courses` 로 생성. 미생성 시 빈 배열이라 큐레이션만 사용된다.
+import generatedCourses from "../data/golf-courses.json";
 
 /**
- * Curated list of well-known Korean golf courses.
- *
- * This serves three purposes:
- *  1. Featured courses on the home page.
- *  2. Instant local autocomplete results (no API round-trip).
- *  3. A deterministic id→coordinate map so /course/[id] works offline.
- *
- * Geocoding via Kakao/Google is layered ON TOP of this for arbitrary
- * Korean course names the user might type. Results are always Korea-only.
+ * Curated, hand-tuned golf courses (with marketing images).
+ * Used for the home-page featured cards and merged into the full dataset.
  */
-export const KOREAN_GOLF_COURSES: GolfCourse[] = [
+const CURATED_COURSES: GolfCourse[] = [
   {
     id: "jack-nicklaus-gc-korea",
     name: "잭니클라우스 GC 코리아",
@@ -109,6 +105,26 @@ export const KOREAN_GOLF_COURSES: GolfCourse[] = [
       "https://images.unsplash.com/photo-1632946990873-3f8d3f0c9b07?auto=format&fit=crop&w=1200&q=70",
   },
 ];
+
+const normalizeName = (s: string) => s.replace(/\s+/g, "").toLowerCase();
+
+/**
+ * Full searchable dataset = curated courses first (so their images/ids win),
+ * then the generated nationwide seed, de-duplicated by id and by name.
+ */
+export const KOREAN_GOLF_COURSES: GolfCourse[] = (() => {
+  const merged: GolfCourse[] = [];
+  const seenId = new Set<string>();
+  const seenName = new Set<string>();
+  for (const c of [...CURATED_COURSES, ...(generatedCourses as GolfCourse[])]) {
+    const nameKey = normalizeName(c.name);
+    if (seenId.has(c.id) || seenName.has(nameKey)) continue;
+    seenId.add(c.id);
+    seenName.add(nameKey);
+    merged.push(c);
+  }
+  return merged;
+})();
 
 const byId = new Map(KOREAN_GOLF_COURSES.map((c) => [c.id, c]));
 

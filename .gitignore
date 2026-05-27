@@ -32,3 +32,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# build-courses 재실행용 진행 캐시
+scripts/.courses-cache.json
+scripts/.geocode-qcache.json
